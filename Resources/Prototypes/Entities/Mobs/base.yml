@@ -7,6 +7,12 @@
   save: false
   id: BaseControllable
   components:
+  # Reserve start: mob viewcone defaults
+  - type: Viewcone
+  - type: ViewconeOccludable
+    useMemory: false
+  - type: ViewconeFootstepsEffect
+  # Reserve end
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -172,6 +178,9 @@
   id: MobCombat
   abstract: true
   components:
+  # Reserve start: melee viewcone effect
+  - type: ViewconeMeleeEffect
+  # Reserve end
   - type: CombatMode
   - type: MeleeWeapon
     hidden: true

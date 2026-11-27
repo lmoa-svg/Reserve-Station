@@ -6,6 +6,10 @@
   name: turret
   abstract: true
   components:
+  # Reserve start: turret viewcone occlusion
+  - type: ViewconeOccludable
+    occludeIfAnchored: true
+  # Reserve end
   - type: Clickable
   - type: InteractionOutline
   - type: Actions

@@ -1,0 +1,4 @@
+- type: shader
+  id: Viewcone
+  kind: source
+  path: "/Textures/_Reserve/Shaders/viewcone.swsl"

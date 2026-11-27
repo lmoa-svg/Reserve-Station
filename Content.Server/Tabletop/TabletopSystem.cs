@@ -18,6 +18,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using Content.Server.Chat.Managers;
+using Content.Shared._Reserve.Viewcone;
 
 namespace Content.Server.Tabletop
 {
@@ -110,6 +111,11 @@ namespace Content.Server.Tabletop
             var protoId = meta.EntityPrototype?.ID;
 
             var hologram = Spawn(protoId, session.Position.Offset(-1, 0));
+
+            // Reserve start: viewcone tabletop event
+            var ev = new TabletopSpawnedEvent();
+            RaiseLocalEvent(hologram, ref ev);
+            // Reserve end
 
             // Make sure the entity can be dragged and can be removed, move it into the board game world and add it to the Entities hashmap
             EnsureComp<TabletopDraggableComponent>(hologram);

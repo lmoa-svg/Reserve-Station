@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.Client._Reserve.Viewcone;
 using Content.Client.Gravity;
 using Content.Shared.Anomaly;
 using Content.Shared.Anomaly.Components;
@@ -14,6 +15,7 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly FloatingVisualizerSystem _floating = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly SpriteVisibilitySystem _spriteVis = default!; // Reserve: sprite visibility
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -74,10 +76,7 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
             _sprite.SetScale((uid, sprite), new Vector2(scale, scale));
 
             var transparency = (byte)(65 * (1f - completion) + 190);
-            if (transparency < sprite.Color.AByte)
-            {
-                _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(transparency));
-            }
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(AnomalyComponent), transparency / 255f); // Reserve: _sprite.SetColor -> _spriteVis
         }
     }
 
@@ -87,6 +86,6 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
             return;
 
         _sprite.SetScale((ent.Owner, sprite), Vector2.One);
-        _sprite.SetColor((ent.Owner, sprite), sprite.Color.WithAlpha(1f));
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(AnomalyComponent), 1f); // Reserve: _sprite.SetColor -> _spriteVis
     }
 }

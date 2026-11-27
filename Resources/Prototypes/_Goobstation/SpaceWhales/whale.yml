@@ -115,6 +115,10 @@
     - HideContextMenu
   - type: Physics
     canCollide: false
+  # Reserve start: space whale occlusion
+  - type: ViewconeOccludable
+    useMemory: false
+  # Reserve end
 
 - type: entity
   id: SpaceLeviathanDespawn

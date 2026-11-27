@@ -21,6 +21,10 @@
     - type: HideLayerClothing
       slots:
       - Snout
+    # Reserve start: chameleon mask viewcone
+    - type: ViewconeModifier
+      angleModifier: 1
+    # Reserve end
 
 - type: entity
   parent: ClothingMaskGasChameleon

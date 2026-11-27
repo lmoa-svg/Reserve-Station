@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client._Reserve.Viewcone;
 using Content.Client.Effects;
 using Content.Client.Smoking;
 using Content.Shared.Chemistry.Components;
@@ -12,17 +13,15 @@ namespace Content.Client.Polymorph.Systems;
 public sealed class ChameleonProjectorSystem : SharedChameleonProjectorSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly SpriteVisibilitySystem _spriteVis = default!; // Reserve: SpriteSystem -> SpriteVisibilitySystem
 
     private EntityQuery<AppearanceComponent> _appearanceQuery;
-    private EntityQuery<SpriteComponent> _spriteQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _appearanceQuery = GetEntityQuery<AppearanceComponent>();
-        _spriteQuery = GetEntityQuery<SpriteComponent>();
 
         SubscribeLocalEvent<ChameleonDisguiseComponent, AfterAutoHandleStateEvent>(OnHandleState);
 
@@ -45,17 +44,12 @@ public sealed class ChameleonProjectorSystem : SharedChameleonProjectorSystem
 
     private void OnStartup(Entity<ChameleonDisguisedComponent> ent, ref ComponentStartup args)
     {
-        if (!_spriteQuery.TryComp(ent, out var sprite))
-            return;
-
-        ent.Comp.WasVisible = sprite.Visible;
-        _sprite.SetVisible((ent.Owner, sprite), false);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ChameleonDisguisedComponent), 0f); // Reserve: _sprite.SetVisible -> _spriteVis
     }
 
     private void OnShutdown(Entity<ChameleonDisguisedComponent> ent, ref ComponentShutdown args)
     {
-        if (_spriteQuery.TryComp(ent, out var sprite))
-            _sprite.SetVisible((ent.Owner, sprite), ent.Comp.WasVisible);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ChameleonDisguisedComponent), 1f); // Reserve: _sprite.SetVisible -> _spriteVis
     }
 
     private void OnGetFlashEffectTargetEvent(Entity<ChameleonDisguisedComponent> ent, ref GetFlashEffectTargetEvent args)

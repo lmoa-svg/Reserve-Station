@@ -41,5 +41,6 @@ public static partial class PoolManager
         (CCVars.LavalandEnabled.Name, "false"), // Lavaland Change
         (GoobCVars.DisablePathfinding.Name, "true"), // Goobstation
         (GoobCVars.InteractionParticlesEnabled.Name, "false"), // Goobstation
+        (CCVars.DisableVisionEffects.Name, "true"), // Reserve: disable viewcone effects in tests
     };
 }

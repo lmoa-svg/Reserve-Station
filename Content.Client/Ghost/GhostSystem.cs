@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client._Reserve.Viewcone;
 using Content.Client._Shitcode.Wizard.Systems;
 using Content.Client._Starlight.Trail; // Reserve
 using Content.Client.Movement.Systems;
@@ -21,6 +22,7 @@ namespace Content.Client.Ghost
         [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
         [Dependency] private readonly ContentEyeSystem _contentEye = default!;
         [Dependency] private readonly SpriteSystem _sprite = default!;
+        [Dependency] private readonly SpriteVisibilitySystem _spriteVis = default!; // Reserve: sprite visibility
         [Dependency] private readonly GhostVisibilitySystem _ghostVisSystem = default!; // Goobstation
 
         public int AvailableGhostRoleCount { get; private set; }
@@ -42,11 +44,13 @@ namespace Content.Client.Ghost
 
                 _ghostVisibility = value;
 
-                var query = AllEntityQuery<GhostComponent, SpriteComponent>();
-                while (query.MoveNext(out var uid, out _, out var sprite))
+                // Reserve start: use sprite visibility system
+                var query = AllEntityQuery<GhostComponent>();
+                while (query.MoveNext(out var uid, out _))
                 {
-                    _sprite.SetVisible((uid, sprite), value || uid == _playerManager.LocalEntity);
+                    _spriteVis.UpdateVisibilityModifiers(uid, nameof(GhostComponent), value || uid == _playerManager.LocalEntity);
                 }
+                // Reserve end
             }
         }
 
@@ -82,8 +86,7 @@ namespace Content.Client.Ghost
 
         private void OnStartup(EntityUid uid, GhostComponent component, ComponentStartup args)
         {
-            if (TryComp(uid, out SpriteComponent? sprite))
-                _sprite.SetVisible((uid, sprite), GhostVisibility || uid == _playerManager.LocalEntity);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(GhostComponent), GhostVisibility || uid == _playerManager.LocalEntity); // Reserve: _sprite.SetVisible -> _spriteVis
         }
 
         private void OnToggleLighting(EntityUid uid, EyeComponent component, ToggleLightingActionEvent args)

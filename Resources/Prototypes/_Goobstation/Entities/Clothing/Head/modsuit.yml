@@ -7,6 +7,10 @@
   name: base modsuit helmet
   categories: [ HideSpawnMenu ]
   components:
+  # Reserve start: modsuit helmet viewcone
+  - type: ViewconeModifier
+    angleModifier: 0.85
+  # Reserve end
   - type: Sprite
     state: icon
   - type: Clickable

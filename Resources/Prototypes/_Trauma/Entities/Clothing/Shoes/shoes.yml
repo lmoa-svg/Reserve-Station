@@ -6,3 +6,6 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepSilence
+  # Reserve start: silent footsteps viewcone
+  - type: ViewconeSilentFootsteps
+  # Reserve end

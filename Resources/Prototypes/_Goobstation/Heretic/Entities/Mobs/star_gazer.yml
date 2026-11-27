@@ -114,6 +114,10 @@
     activateSound: null
     deactivateSound: null
     drawOverlay: false
+  # Reserve start: star gazer viewcone
+  - type: Viewcone
+    baseConeAngle: 360
+  # Reserve end
   - type: SupermatterImmune
   - type: EventHorizonIgnore
   - type: SpacetimeSpellbladeEnchantment # It's not a spellblade, trust

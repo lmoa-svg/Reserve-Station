@@ -5,6 +5,9 @@
   id: WeaponArcStatic
   categories: [ HideSpawnMenu ]
   components:
+    # Reserve start: weapon arc occlusion
+    - type: ViewconeOccludable
+    # Reserve end
     - type: TimedDespawn
       lifetime: 2.0
     - type: Sprite
@@ -22,6 +25,9 @@
   id: WeaponArcAnimated
   categories: [ HideSpawnMenu ]
   components:
+    # Reserve start: weapon arc occlusion
+    - type: ViewconeOccludable
+    # Reserve end
     - type: Sprite
       sprite: Effects/arcs.rsi
       state: disarm

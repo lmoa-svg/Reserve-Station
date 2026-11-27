@@ -243,6 +243,10 @@
       Destroyed: 0
     slotId: eyes
   - type: Eyes # Shitmed
+  # Reserve start: arachnid viewcone bonus
+  - type: ViewconeModifier
+    angleModifier: 1.25
+  # Reserve end
   - type: Tag # goob edit
     tags:
     - Meat

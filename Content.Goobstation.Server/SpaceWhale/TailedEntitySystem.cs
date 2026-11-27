@@ -1,3 +1,4 @@
+using Content.Shared._Reserve.Viewcone.Components;
 using Robust.Shared.Map;
 
 namespace Content.Goobstation.Server.SpaceWhale; // predictions? how bout you predict my ass, but seriously this is THE problem with ts cuz i have no fucking idea how to predict it
@@ -55,6 +56,11 @@ public sealed partial class TailedEntitySystem : EntitySystem
             var spawnPos = headPos - offset;
 
             var segment = Spawn(comp.Prototype, new EntityCoordinates(mapUid.Value, spawnPos));
+            // Reserve start: track tail segment head for viewcone override
+            var segmentComp = EnsureComp<ViewconeTailedSegmentComponent>(segment);
+            segmentComp.Head = uid;
+            Dirty(segment, segmentComp);
+            // Reserve end
             comp.TailSegments.Add(segment);
         }
     }

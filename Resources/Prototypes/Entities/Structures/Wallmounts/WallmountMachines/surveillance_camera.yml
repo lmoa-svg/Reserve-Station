@@ -45,6 +45,10 @@
   - type: ApcPowerReceiver
   - type: ExtensionCableReceiver
   - type: Eye
+  # Reserve start: camera full viewcone
+  - type: Viewcone
+    baseConeAngle: 360
+  # Reserve end
   - type: WiredNetworkConnection
   - type: DeviceNetworkRequiresPower
   - type: Transform

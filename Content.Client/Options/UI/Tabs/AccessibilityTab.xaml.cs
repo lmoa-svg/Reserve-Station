@@ -23,6 +23,7 @@ public sealed partial class AccessibilityTab : Control
         Control.AddOptionPercentSlider(CCVars.SpeechBubbleTextOpacity, SpeechBubbleTextOpacitySlider);
         Control.AddOptionPercentSlider(CCVars.SpeechBubbleSpeakerOpacity, SpeechBubbleSpeakerOpacitySlider);
         Control.AddOptionPercentSlider(CCVars.SpeechBubbleBackgroundOpacity, SpeechBubbleBackgroundOpacitySlider);
+        Control.AddOptionPercentSlider(CCVars.VisionGrainScale, VisionGrainScaleSlider); // Reserve: vision grain scale
         Control.AddOptionCheckBox(CCVars.ChatAutoFillHighlights, AutoFillHighlightsCheckBox);
         // Goobstation - Highight chat ping sounds!
         Control.AddOptionCheckBox(CCVars.ChatHighlightSound, HighlightSoundCheckBox);

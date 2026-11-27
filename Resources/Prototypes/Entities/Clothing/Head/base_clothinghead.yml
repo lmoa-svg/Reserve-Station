@@ -132,7 +132,7 @@
 
 - type: entity
   abstract: true
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, BaseClothingViewconeSmall] # Reserve: ClothingHeadBase -> [ClothingHeadBase, BaseClothingViewconeSmall]
   id: ClothingHeadEVAHelmetBase
   name: base space helmet
   components:
@@ -182,6 +182,10 @@
   name: base hardsuit helmet
   categories: [ HideSpawnMenu ]
   components:
+  # Reserve start: hardsuit helmet viewcone
+  - type: ViewconeModifier
+    angleModifier: 0.85
+  # Reserve end
 # SlotBlocker blocked until UI change
 #  - type: SlotBlock
 #    slots: [ears, eyes, mask]

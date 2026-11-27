@@ -5,6 +5,9 @@
   id: BaseItem
   abstract: true
   components:
+  # Reserve start: item viewcone occlusion
+  - type: ViewconeOccludable
+  # Reserve end
   # Goobstation edit start
   - type: EmitSoundOnPickup
     sound:

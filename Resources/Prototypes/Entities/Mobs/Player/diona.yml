@@ -6,6 +6,10 @@
   parent: BaseMobDiona
   id: MobDiona
   components:
+    # Reserve start: diona full viewcone
+    - type: Viewcone
+      baseConeAngle: 360
+    # Reserve end
     - type: Respirator
       damage:
         types:

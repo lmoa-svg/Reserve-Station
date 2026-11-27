@@ -184,6 +184,10 @@
     interactSuccessString: hugging-success-generic
     interactSuccessSound: /Audio/Effects/thudswoosh.ogg
     messagePerceivedByOthers: hugging-success-generic-others
+  # Reserve start: flesh ascend viewcone
+  - type: Viewcone
+    baseConeAngle: 360
+  # Reserve end
 
 - type: entity
   categories: [ HideSpawnMenu ]

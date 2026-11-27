@@ -170,6 +170,10 @@
     drawOverlay: false
   - type: Eye
     drawFov: false
+  # Reserve start: prophet full viewcone
+  - type: Viewcone
+    baseConeAngle: 360
+  # Reserve end
   - type: ContentEye
     maxZoom: 1.25, 1.25
     targetZoom: 1.25, 1.25

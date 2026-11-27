@@ -159,6 +159,10 @@
   placement:
     mode: SnapgridCenter
   components:
+  # Reserve start: puddle viewcone occlusion
+  - type: ViewconeOccludable
+    occludeIfAnchored: true
+  # Reserve end
   - type: Clickable
   - type: Slippery
     staminaDamage: 0

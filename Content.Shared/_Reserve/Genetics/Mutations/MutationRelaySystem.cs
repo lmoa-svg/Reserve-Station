@@ -6,6 +6,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Speech;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Goobstation.Common.Weapons;
+using Content.Shared._Reserve.Movement;
+using Content.Shared._Reserve.Viewcone;
 using System.Numerics;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -25,11 +27,13 @@ public sealed class MutationRelaySystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MutatableComponent, AfterFlashedEvent>(RelayEvent);
+        SubscribeLocalEvent<MutatableComponent, FootStepEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, MobStateChangedEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, BleedModifierEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, DamageModifyEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, GetUserMeleeDamageEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, AccentGetEvent>(RelayEvent);
+        SubscribeLocalEvent<MutatableComponent, ModifyViewconeAngleEvent>(RelayEvent);
     }
 
     public void RelayEvent<T>(Entity<MutatableComponent> ent, ref T args) where T: notnull

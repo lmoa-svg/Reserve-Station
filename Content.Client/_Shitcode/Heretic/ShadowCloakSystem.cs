@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client._Reserve.Viewcone;
 using Content.Client._Shitcode.Heretic.SpriteOverlay;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Goobstation.Wizard.Traps;
@@ -13,7 +14,7 @@ namespace Content.Client._Shitcode.Heretic;
 
 public sealed class ShadowCloakSystem : SharedShadowCloakSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly SpriteVisibilitySystem _spriteVis = default!; // Reserve: SpriteSystem -> SpriteVisibilitySystem
     [Dependency] private readonly AppearanceSystem _appearance = default!;
 
     public override void Initialize()
@@ -56,18 +57,13 @@ public sealed class ShadowCloakSystem : SharedShadowCloakSystem
     {
         base.Startup(ent);
 
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
-
-        ent.Comp.WasVisible = sprite.Visible;
-        _sprite.SetVisible((ent, sprite), false);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ShadowCloakedComponent), 0f); // Reserve: _sprite.SetVisible -> _spriteVis
     }
 
     protected override void Shutdown(Entity<ShadowCloakedComponent> ent)
     {
         base.Shutdown(ent);
 
-        if (TryComp(ent, out SpriteComponent? sprite))
-            _sprite.SetVisible((ent, sprite), ent.Comp.WasVisible);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ShadowCloakedComponent), 1f); // Reserve: _sprite.SetVisible -> _spriteVis
     }
 }

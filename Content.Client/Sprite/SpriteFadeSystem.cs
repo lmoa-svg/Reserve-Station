@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.Client._Reserve.Viewcone;
 using Content.Client.Gameplay;
 using Content.Shared.Sprite;
 using Robust.Client.GameObjects;
@@ -29,7 +30,7 @@ public sealed class SpriteFadeSystem : EntitySystem
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly SpriteVisibilitySystem _spriteVis = default!; // Reserve: SpriteSystem -> SpriteVisibilitySystem
 
     private List<(MapCoordinates Point, bool ExcludeBoundingBox)> _points = new();
 
@@ -60,7 +61,7 @@ public sealed class SpriteFadeSystem : EntitySystem
         if (MetaData(uid).EntityLifeStage >= EntityLifeStage.Terminating || !TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
-        _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(component.OriginalAlpha));
+        _spriteVis.UpdateVisibilityModifiers(uid, nameof(FadingSpriteComponent), 1f); // Reserve: _sprite.SetColor -> _spriteVis
     }
 
     /// <summary>
@@ -134,7 +135,7 @@ public sealed class SpriteFadeSystem : EntitySystem
 
                     if (!sprite.Color.A.Equals(newColor))
                     {
-                        _sprite.SetColor((ent, sprite), sprite.Color.WithAlpha(newColor));
+                        _spriteVis.UpdateVisibilityModifiers(ent, nameof(FadingSpriteComponent), newColor); // Reserve: _sprite.SetColor -> _spriteVis
                     }
                 }
             }
@@ -159,7 +160,7 @@ public sealed class SpriteFadeSystem : EntitySystem
 
             if (!newColor.Equals(sprite.Color.A))
             {
-                _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(newColor));
+                _spriteVis.UpdateVisibilityModifiers(uid, nameof(FadingSpriteComponent), newColor); // Reserve: _sprite.SetColor -> _spriteVis
             }
             else
             {

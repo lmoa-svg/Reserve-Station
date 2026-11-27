@@ -1,11 +1,12 @@
-using Robust.Client.GameObjects;
+using Content.Client._Reserve.Viewcone;
 using Content.Goobstation.Shared.Wraith.Components;
+using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Wraith;
 
 public sealed partial class FadingInSystem : EntitySystem
 {
-    [Dependency] private SpriteSystem _sprites = default!;
+    [Dependency] private SpriteVisibilitySystem _spriteVis = default!; // Reserve: SpriteSystem -> SpriteVisibilitySystem
 
     public override void Initialize()
     {
@@ -16,11 +17,8 @@ public sealed partial class FadingInSystem : EntitySystem
 
     private void OnStartup(EntityUid uid, FadingInComponent fading, ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite))
-            return;
-
         // Start fully transparent
-        _sprites.SetColor((uid, sprite), sprite.Color.WithAlpha(0f));
+        _spriteVis.UpdateVisibilityModifiers(uid, nameof(FadingInComponent), 0f); // Reserve: _sprites.SetColor -> _spriteVis
         fading.Elapsed = 0f;
     }
 
@@ -30,7 +28,7 @@ public sealed partial class FadingInSystem : EntitySystem
 
         var query = EntityQueryEnumerator<FadingInComponent, SpriteComponent>();
 
-        while (query.MoveNext(out var uid, out var fading, out var sprite))
+        while (query.MoveNext(out var uid, out var fading, out _)) // Reserve: var sprite -> _
         {
             if (fading.Finished)
                 continue;
@@ -38,7 +36,7 @@ public sealed partial class FadingInSystem : EntitySystem
             fading.Elapsed += frameTime;
 
             var alpha = Math.Clamp(fading.Elapsed / fading.FadeInTime, 0f, 1f);
-            _sprites.SetColor((uid, sprite), sprite.Color.WithAlpha(alpha));
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(FadingInComponent), alpha); // Reserve: _sprites.SetColor -> _spriteVis
         }
     }
 }

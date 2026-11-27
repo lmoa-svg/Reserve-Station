@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.Shared._Reserve.Viewcone;
 using Content.Shared.Examine;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -93,6 +94,16 @@ public sealed class PopupOverlay : Overlay
 
             if (mapPos.MapId != args.MapId)
                 continue;
+
+            // Reserve start: viewcone popup check
+            if (ourEntity != null)
+            {
+                var ev = new ShowPopupAttemptEvent(mapPos.Position, ourPos);
+                _entManager.EventBus.RaiseLocalEvent(ourEntity.Value, ref ev);
+                if (ev.Cancelled)
+                    continue;
+            }
+            // Reserve end
 
             var distance = (mapPos.Position - ourPos).Length();
 
