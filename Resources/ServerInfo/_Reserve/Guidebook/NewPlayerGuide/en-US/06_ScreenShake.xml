@@ -1,0 +1,20 @@
+<Document>
+# Camera recoil
+
+For example, when you punch something with your fist, the screen shakes slightly on impact.
+
+Below you can adjust the screen shake intensity (this option can also be changed later in "Options" -> "Accessibility").
+
+<GuideCard>
+  <GuideCVarSlider CVar="accessibility.screen_shake_intensity" Title="Screen shake intensity" Min="0" Max="1" Format="Percent" DisabledByCVar="accessibility.reduced_motion" Note="At 0%, the screen stays completely still during hits, gunfire, and explosions. Enabling 'Reduce motion of visual effects' also disables screen shake." DisabledNote="The slider is disabled because 'Reduce motion of visual effects' is currently enabled in Options."/>
+</GuideCard>
+
+<GuideCard Title="This is what it looks like (click to punch):">
+  <GuideScreenShakePreview/>
+</GuideCard>
+
+<GuideCard Title="When screen shake triggers:">
+  <GuideInfoItem Title="Melee strikes and incoming hits" Description="Punching or swinging a weapon slightly rocks the camera, while hits on your character cause a sharp screen jolt."/>
+  <GuideInfoItem Title="Gunfire and explosions" Description="Firing weapons gives camera recoil, and nearby explosions make the screen noticeably shudder."/>
+</GuideCard>
+</Document>

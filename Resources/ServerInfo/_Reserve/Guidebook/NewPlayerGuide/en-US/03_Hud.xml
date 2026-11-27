@@ -1,0 +1,12 @@
+<Document>
+# HUD layout
+
+The standard HUD puts the chat and panels on top of the game field. The separated HUD moves the chat into a separate column on the right: the chat no longer covers the game field, but the field itself becomes narrower.
+
+Pick whichever is comfortable. You can switch it at any time.
+
+<GuideChoiceRow CVar="ui.layout">
+  <GuideChoice Value="Default" Title="Default" Description="Chat in the top-right corner, more room for the game field, more familiar to Roblox kids." Image="/Textures/_Reserve/NewPlayerGuide/hud_default.png"/>
+  <GuideChoice Value="Separated" Title="Separated" Description="Chat in a separate column on the right with extra features, handy for reading dialogue and small interactions, the classic SS13 interface." Image="/Textures/_Reserve/NewPlayerGuide/hud_separated.png"/>
+</GuideChoiceRow>
+</Document>

@@ -1,0 +1,41 @@
+- type: newPlayerGuidePage
+  id: NewPlayerGuideWelcome
+  order: 1
+  document: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/en-US/01_Welcome.xml"
+  localizedDocument:
+    ru-RU: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/ru-RU/01_Welcome.xml"
+
+- type: newPlayerGuidePage
+  id: NewPlayerGuideSpeech
+  order: 2
+  document: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/en-US/02_Speech.xml"
+  localizedDocument:
+    ru-RU: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/ru-RU/02_Speech.xml"
+
+- type: newPlayerGuidePage
+  id: NewPlayerGuideHud
+  order: 3
+  document: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/en-US/03_Hud.xml"
+  localizedDocument:
+    ru-RU: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/ru-RU/03_Hud.xml"
+
+- type: newPlayerGuidePage
+  id: NewPlayerGuideMood
+  order: 4
+  document: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/en-US/04_Mood.xml"
+  localizedDocument:
+    ru-RU: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/ru-RU/04_Mood.xml"
+
+- type: newPlayerGuidePage
+  id: NewPlayerGuideViewcone
+  order: 5
+  document: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/en-US/05_Viewcone.xml"
+  localizedDocument:
+    ru-RU: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/ru-RU/05_Viewcone.xml"
+
+- type: newPlayerGuidePage
+  id: NewPlayerGuideScreenShake
+  order: 6
+  document: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/en-US/06_ScreenShake.xml"
+  localizedDocument:
+    ru-RU: "/ServerInfo/_Reserve/Guidebook/NewPlayerGuide/ru-RU/06_ScreenShake.xml"

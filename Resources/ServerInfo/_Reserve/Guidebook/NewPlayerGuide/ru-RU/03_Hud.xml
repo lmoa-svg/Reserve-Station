@@ -1,0 +1,12 @@
+<Document>
+# Тип HUD
+
+Стандартный HUD располагает чат и панели поверх игрового поля. Разделённый HUD выносит чат в отдельную колонку справа: чат больше не перекрывает игровое поле, но само поле становится уже.
+
+Выберите удобный вариант. Переключить его можно в любой момент.
+
+<GuideChoiceRow CVar="ui.layout">
+  <GuideChoice Value="Default" Title="Стандартный" Description="Чат в правом верхнем углу, больше места для игрового поля, более привычно детишкам из роблокса." Image="/Textures/_Reserve/NewPlayerGuide/hud_default.png"/>
+  <GuideChoice Value="Separated" Title="Разделённый" Description="Чат в отдельной колонке справа с дополнительным функционалом, удобно вчитываться в диалог и мелкие взаимодействия, классический вариант интерфейса из SS13." Image="/Textures/_Reserve/NewPlayerGuide/hud_separated.png"/>
+</GuideChoiceRow>
+</Document>

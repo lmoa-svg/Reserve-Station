@@ -1,0 +1,18 @@
+<Document>
+# Mood effects
+
+On this build, your character has a mood that dynamically changes from what happens around them: good food and drinks bring joy, while injuries, handcuffs, and stress make it worse.
+
+Mood directly affects your character's physical well-being and perception of the world. Below you can configure mood visual effects (this option can also be changed in "Options" -> "Graphics").
+
+<GuideChoiceRow CVar="mood.visual_effects">
+  <GuideChoice Value="true" Title="Enable effects" Description="The screen becomes brighter and more vivid when happy, and fades towards black and white under stress and depression."/>
+  <GuideChoice Value="false" Title="Disable effects" Description="The game's colours always stay unchanged."/>
+</GuideChoiceRow>
+
+<GuideCard Title="How mood affects the game:">
+  <GuideInfoItem Title="Speed bonus and penalty" Description="A happy character moves noticeably faster, while a depressed one slows down."/>
+  <GuideInfoItem Title="Overlay" Description="A screen shader smoothly changes the world's colour saturation depending on your character's emotional state."/>
+  <GuideInfoItem Title="Seeing the causes" Description="Click the mood icon in the right alert panel to see the full list of emotional factors affecting your character in chat."/>
+</GuideCard>
+</Document>

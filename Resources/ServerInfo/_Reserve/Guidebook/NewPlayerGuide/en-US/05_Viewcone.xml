@@ -1,0 +1,21 @@
+<Document>
+# Field of view
+
+Your character has a limited viewing angle: you clearly see what is in front of you and right around you, while everything behind your back transitions into a desaturated area with a grain effect.
+
+Below you can adjust the graininess outside your field of view (this option can also be changed later in "Options" -> "Accessibility").
+
+<GuideCard>
+  <GuideCVarSlider CVar="vision.grain_scale" Title="Vision cone graininess" Min="0" Max="1" Format="Percent" DisabledByCVar="accessibility.reduced_motion" Note="At 0%, the area behind you stays pure black-and-white without noise. Enabling 'Reduce motion of visual effects' also disables graininess." DisabledNote="The slider is disabled because 'Reduce motion of visual effects' is currently enabled in Options."/>
+</GuideCard>
+
+<GuideCard Title="This is what it looks like:">
+  <GuideViewconePreview/>
+</GuideCard>
+
+<GuideCard Title="How field of view works:">
+  <GuideInfoItem Title="Peripheral vision and memory" Description="Objects that leave your field of view smoothly fade out over a few seconds, while objects right next to you are visible from all sides."/>
+  <GuideInfoItem Title="Equipment, scopes, and genetics" Description="Helmets, gas masks, welding masks, and aiming narrow your viewing angle, while some species and mutations widen it instead."/>
+  <GuideInfoItem Title="Sound indicators" Description="Footsteps, speech, and attacks behind you are shown with brief visual markers so you can react in time."/>
+</GuideCard>
+</Document>

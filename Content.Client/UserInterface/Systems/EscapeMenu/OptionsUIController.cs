@@ -68,4 +68,12 @@ public sealed class OptionsUIController : UIController
             OpenWindow();
         }
     }
+
+    // Reserve start: new player guide
+    public void ReloadIfOpen()
+    {
+        if (_optionsWindow is { Disposed: false, IsOpen: true })
+            _optionsWindow.UpdateTabs();
+    }
+    // Reserve end
 }

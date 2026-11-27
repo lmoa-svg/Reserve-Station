@@ -1,0 +1,30 @@
+<Document>
+# Speech style above the head
+
+Character speech above their heads can be shown in the compact Runechat style or as classic speech bubbles.
+
+Pick whichever you prefer. You can always change it in the "Options" menu (Esc).
+
+<GuideChoiceRow CVar="chat.runechat">
+  <GuideChoice Value="true" Title="Runechat style" Description="Compact coloured pixel text above the speaker."/>
+  <GuideChoice Value="false" Title="Speech bubbles" Description="Classic dialogue bubbles popping up above the character."/>
+</GuideChoiceRow>
+
+<GuideCVarSection CVar="chat.runechat" Equals="true">
+  <GuideCard>
+    <GuideCVarSlider CVar="chat.runechat_font_size" Title="Font size" Min="6" Max="24" Format="Int"/>
+    <GuideCVarSlider CVar="chat.runechat_outline_scale" Title="Outline thickness" Min="0" Max="2" Format="Percent"/>
+  </GuideCard>
+</GuideCVarSection>
+
+<GuideCVarSection CVar="chat.runechat" Equals="false">
+  <GuideCard>
+    <GuideCVarCheckBox CVar="chat.enable_fancy_bubbles" Text="Show names"/>
+    <GuideCVarCheckBox CVar="chat.fancy_name_background" Text="Show name background" EnabledByCVar="chat.enable_fancy_bubbles"/>
+  </GuideCard>
+</GuideCVarSection>
+
+<GuideCard Title="This is what it looks like:">
+  <GuideSpeechPreview/>
+</GuideCard>
+</Document>
