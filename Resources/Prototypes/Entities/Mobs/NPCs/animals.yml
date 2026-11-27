@@ -1424,6 +1424,9 @@
   description: The genetic bipedal ancestor of... Uh... Something. Yeah, there's definitely something on the station that descended from whatever this is.
   abstract: true
   components:
+  # Reserve start: mutatable monkeys
+  - type: Mutatable
+  # Reserve end
   - type: Blindable # monkeys can be blind while sleeping!
   - type: VentCrawler # goobstation - Ventcrawl
     allowInventory: false
@@ -1599,6 +1602,13 @@
   parent: MobBaseAncestor
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   components:
+  # Reserve start: monkey mutations
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # always monkey...
+    dormant:
+    - MutationMonkified
+  # Reserve end
   - type: NameIdentifier
     group: Monkey
   - type: Speech
@@ -1701,6 +1711,13 @@
   description: Cousins to the sentient race of lizard people, kobolds blend in with their natural habitat and are as nasty as monkeys; ready to pull out your hair and stab you to death.
   abstract: true
   components:
+  # Reserve start: kobold mutations
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # free lizardmen...
+    dormant:
+    - MutationMonkified
+  # Reserve end
   - type: NameIdentifier
     group: Kobold
   - type: LizardAccent

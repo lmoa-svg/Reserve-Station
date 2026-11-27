@@ -1,0 +1,6 @@
+# based on Trauma-Station: Resources/Prototypes/_Trauma/Voice/emotes.yml (Twitch entry)
+
+- type: emote
+  id: Twitch
+  name: chat-emote-name-twitch
+  chatMessages: ["chat-emote-msg-twitch"]

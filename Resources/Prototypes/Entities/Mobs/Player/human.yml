@@ -5,6 +5,12 @@
   name: Urist McHands
   parent: BaseMobHuman
   id: MobHuman
+  # Reserve start: human mutations
+  components:
+  - type: Mutatable
+    dormant:
+    - MutationMonkified # return to monke
+  # Reserve end
 
 #Syndie
 - type: entity

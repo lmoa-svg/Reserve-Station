@@ -6,7 +6,9 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Server.Body.Components;
 
 [RegisterComponent]
-[Access(typeof(ThermalRegulatorSystem))]
+// Reserve start: genetics thermal regulator
+[Access(typeof(ThermalRegulatorSystem), typeof(Content.Server._Reserve.Genetics.Abilities.ThermalRegulatorMutationSystem))]
+// Reserve end
 public sealed partial class ThermalRegulatorComponent : Component
 {
     /// <summary>

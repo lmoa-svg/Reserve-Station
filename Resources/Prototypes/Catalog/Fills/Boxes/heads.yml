@@ -122,3 +122,6 @@
         - id: AnalysisComputerCircuitboard #Because sometimes round start artis just fucking explode on the pad.
         - id: ArtifactAnalyzerMachineCircuitboard
         - id: StationAiFixerCircuitboard
+        # Reserve start: xenobio bounty console
+        - id: XenobiologyBountyComputerCircuitboard
+        # Reserve end

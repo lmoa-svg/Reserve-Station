@@ -11,6 +11,9 @@
   id: BaseMobSpeciesNonPerishable
   abstract: true
   components:
+  # Reserve start: mutatable species
+  - type: Mutatable
+  # Reserve end
   - type: Absorbable # Goobstation - changelings
   - type: WraithAbsorbable # Goobstation - wraith
   - type: Barotrauma

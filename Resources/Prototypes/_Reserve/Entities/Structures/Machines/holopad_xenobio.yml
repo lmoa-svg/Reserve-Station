@@ -1,0 +1,9 @@
+# Xenobiology holopad, based on Trauma-Station.
+
+- type: entity
+  parent: Holopad
+  id: HolopadScienceXenobiology
+  suffix: Xenobio
+  components:
+  - type: Label
+    currentLabel: holopad-science-xenobiology

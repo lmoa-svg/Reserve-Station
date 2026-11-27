@@ -1,0 +1,9 @@
+# Xenobiology save-point beacon, based on Trauma-Station.
+
+- type: entity
+  parent: DefaultStationBeaconScience
+  id: DefaultStationBeaconXenobio
+  suffix: Xenobio
+  components:
+  - type: NavMapBeacon
+    defaultText: station-beacon-xenobio

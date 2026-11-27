@@ -514,4 +514,8 @@ public enum LogType
     SiliconLaws = 10005, // Goobstation
 
     Paint = 10006, // Goobstation
+
+    // Reserve start: genetics log type
+    Genetics = 10007,
+    // Reserve end
 }

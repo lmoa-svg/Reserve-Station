@@ -1,0 +1,75 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationChemSpike
+  name: Chem Spike
+  description: The host can throw a spike of hardened chemicals at someone, then flush their own chemicals into whoever it embeds in.
+  components:
+  - type: Mutation
+    instability: 15
+    difficulty: 16
+    rarity: Rare
+  - type: ActionMutation
+    action: ActionMutationChemSpike
+  - type: ChemSpikeMutation
+    action: ActionMutationChemSpikeTransfer
+    projectileProto: ChemSpikeProjectile
+
+- type: entity
+  parent: BaseMutationAction
+  id: ActionMutationChemSpike
+  name: Fire Chem Spike
+  description: Throw a spike of hardened chemicals at someone. Landing it links your bloodstream up to theirs.
+  components:
+  - type: Sprite
+    sprite: _Reserve/Actions/mutations.rsi
+    layers:
+    - state: chemspike
+  - type: Action
+    useDelay: 10
+    raiseOnAction: false
+  - type: TargetAction
+    checkCanAccess: false
+    range: 15
+  - type: EntityTargetAction
+    event: !type:ChemSpikeActionEvent
+    whitelist:
+      components:
+      - Bloodstream
+
+- type: entity
+  parent: BaseMutationAction
+  id: ActionMutationChemSpikeTransfer
+  name: Transfer Chemicals
+  description: Flush a part of your bloodstream into the mob your chem spike is stuck in.
+  components:
+  - type: Sprite
+    sprite: _Reserve/Actions/mutations.rsi
+    layers:
+    - state: chemspike_swap
+  - type: Action
+    useDelay: 30
+    raiseOnAction: false
+  - type: InstantAction
+    event: !type:ChemTransferActionEvent
+  - type: ChemTransferAction
+
+- type: entity
+  parent: BaseBullet
+  id: ChemSpikeProjectile
+  name: chem spike
+  description: A barbed spike of hardened chemicals. It is stuck in you.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/Darts/dart_red.rsi
+    layers:
+    - state: icon
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Piercing: 3
+  - type: EmbeddableProjectile
+    removalTime: 0.5
+    deleteOnRemove: true
+  - type: ChemTransferProjectile

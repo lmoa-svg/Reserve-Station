@@ -1,0 +1,16 @@
+- type: guideEntry
+  id: Genetics
+  name: guide-entry-genetics
+  text: "/ServerInfo/_Reserve/Guidebook/Medical/en-US/Genetics.xml"
+  localizedText:
+    ru-RU: "/ServerInfo/_Reserve/Guidebook/Medical/Genetics.xml"
+  children:
+  - GeneticsMutations
+
+- type: guideEntry
+  id: GeneticsMutations
+  name: guide-entry-mutations
+  text: "/ServerInfo/_Reserve/Guidebook/Medical/en-US/Mutations.xml"
+  localizedText:
+    ru-RU: "/ServerInfo/_Reserve/Guidebook/Medical/Mutations.xml"
+  filterEnabled: True

@@ -2,3 +2,8 @@
   id: Genetics # thats bait
   recipes:
   - XenoCompatibilityImplanter
+  # Reserve start: genetics equipment
+  - GeneticsComputerCircuitboardRecipe
+  - HandheldGeneticsScannerRecipe
+  - GeneticsDiskRecipe
+  # Reserve end

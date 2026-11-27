@@ -1,0 +1,34 @@
+# based on Trauma-Station: Resources/Prototypes/_Trauma/Entities/StatusEffects/mutations.yml
+
+- type: entity
+  parent: StatusEffectBase
+  id: DnaMeltingStatusEffect
+  name: DNA melting
+  components:
+  - type: StatusEffectEffectsApply
+    effectsOnRemoval:
+    - !type:NestedEffect
+      conditions: # don't do a bad thing if instability is fixed in time
+      - !type:DnaUnstableCondition
+      proto: SomethingHorrible
+    # not parity, always scramble dna when it's removed to prevent edging it every 9 minutes by removing and adding some mutation on the fly
+    - !type:ScrambleDna
+
+- type: entity
+  parent: StatusEffectBase
+  id: DecloningStatusEffect
+  name: decloning
+  # TODO
+
+- type: entity
+  parent: StatusEffectBase
+  id: LookingUpStatusEffect
+  components:
+  - type: StatusEffectEffectsApply
+    effectsOnRemoval:
+    - !type:PopupMessage
+      type: Pvs
+      messages:
+      - entity-effect-popup-eyes-melt
+    - !type:EyeDamage
+      amount: 25

@@ -588,6 +588,17 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
     /// <summary>
     /// Tries to make an entity bleed more or less.
     /// </summary>
+    // Reserve start: genetics bleeding mutation support
+    /// <summary>
+    /// Sets how much blood is refreshed per tick. Used by genetics bleeding mutations.
+    /// </summary>
+    public void SetRefreshAmount(Entity<BloodstreamComponent> ent, FixedPoint2 amount)
+    {
+        ent.Comp.BloodRefreshAmount = amount;
+        Dirty(ent);
+    }
+    // Reserve end
+
     public bool TryModifyBleedAmount(Entity<BloodstreamComponent?> ent, float amount)
     {
         if (!Resolve(ent, ref ent.Comp, logMissing: false))

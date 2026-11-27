@@ -1,0 +1,105 @@
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerGenetics
+  name: genetics console
+  description: A computer used for sequencing, isolating, and modifying biological genomes and unique enzymes.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+      sprite: Structures/Machines/computers.rsi
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+      sprite: Structures/Machines/computers.rsi
+    - map: ["computerLayerScreen"]
+      state: dna
+      sprite: Structures/Machines/computers.rsi
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+      sprite: Structures/Machines/computers.rsi
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+      sprite: Structures/Machines/computers.rsi
+  - type: PointLight
+    radius: 1.5
+    energy: 4.0
+    color: "#43ccb5"
+  - type: Computer
+    board: GeneticsComputerCircuitboard
+  - type: GeneticsConsole
+    sequenceFailSound:
+      path: /Audio/Machines/buzz-sigh.ogg
+    sequenceSound:
+      path: /Audio/Effects/Cargo/ping.ogg
+    combineSound:
+      path: /Audio/Machines/genetics.ogg
+    writeSound:
+      path: /Audio/Machines/terminal_insert_disc.ogg
+    printSound:
+      path: /Audio/Machines/button.ogg
+  - type: GeneticsScanner
+  - type: GeneticsConsoleEnzymes
+    applySound:
+      path: /Audio/Machines/genetics.ogg
+  - type: GeneticsDiskSlot
+  - type: GeneticsPrintout
+  - type: MaterialStorage
+    materialWhiteList:
+    - Biomass
+  - type: DeviceList
+  - type: DeviceNetwork
+    deviceNetId: Wired
+  - type: DeviceLinkSource
+    range: 5
+    ports:
+    - MedicalScannerSender
+  - type: ItemSlots
+    slots:
+      genetics_disk:
+        name: genetics-console-inserted-disk
+        insertSound:
+          path: /Audio/Machines/terminal_insert_disc.ogg
+        ejectSound:
+          path: /Audio/Machines/terminal_insert_disc.ogg
+        whitelist:
+          components:
+          - GeneticsDisk
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+      genetics_disk: !type:ContainerSlot
+  - type: ResearchClient
+  - type: ActiveRadio
+    channels:
+    - Science
+  - type: GeneticsResearchConsole
+  - type: GuideHelp
+    guides:
+    - Genetics
+    - GeneticsMutations
+  - type: ActivatableUI
+    key: enum.GeneticsConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.GeneticsConsoleUiKey.Key:
+        type: GeneticsConsoleBUI
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: DoAfter
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Pai
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: GeneticsComputerCircuitboard
+  name: genetics console computer board
+  description: A computer printed circuit board for a genetics console.
+  components:
+  - type: Sprite
+    state: cpu_medical
+  - type: ComputerBoard
+    prototype: ComputerGenetics

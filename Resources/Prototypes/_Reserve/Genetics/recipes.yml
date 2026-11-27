@@ -1,0 +1,202 @@
+# Mutation combination recipes for the Genetics Combiner
+# Each recipe must strictly have 2 required mutations
+
+- type: mutationRecipe
+  id: FireBreath
+  result: MutationFireBreath
+  required:
+  - MutationPyrokinesis
+  - MutationFierySweat
+
+- type: mutationRecipe
+  id: ThermalAdaptation
+  result: MutationThermalAdaptation
+  required:
+  - MutationColdAdaptation
+  - MutationHeatAdaptation
+
+- type: mutationRecipe
+  id: ThermalWeakness
+  result: MutationThermalWeakness
+  required:
+  - MutationColdWeakness
+  - MutationHeatWeakness
+
+- type: mutationRecipe
+  id: Cryokinesis
+  result: MutationCryokinesis
+  required:
+  - MutationGeladikinesis
+  - MutationColdAdaptation
+
+- type: mutationRecipe
+  id: Pyrokinesis
+  result: MutationPyrokinesis
+  required:
+  - MutationCindikinesis
+  - MutationHeatAdaptation
+
+- type: mutationRecipe
+  id: MindReader
+  result: MutationMindReader
+  required:
+  - MutationAntenna
+  - MutationTelepathy
+
+- type: mutationRecipe
+  id: Gigantism
+  result: MutationGigantism
+  required:
+  - MutationAcromegaly
+  - MutationStrength
+
+- type: mutationRecipe
+  id: Hulk
+  result: MutationHulk
+  required:
+  - MutationGigantism
+  - MutationRadioactivity
+
+- type: mutationRecipe
+  id: Ork
+  result: MutationOrk
+  required:
+  - MutationHulk
+  - MutationMedieval
+
+# RockAbsorber has no recipe on purpose: the mutations (RockEater, RockAbsorber) are still unimplemented
+# (see TODO in body.yml). Re-add this recipe once they are implemented:
+#
+# - type: mutationRecipe
+#   id: RockAbsorber
+#   result: MutationRockAbsorber
+#   required:
+#   - MutationRockEater
+#   - MutationAcidicFlesh
+
+- type: mutationRecipe
+  id: Inexorable
+  result: MutationInexorable
+  required:
+  - MutationStrength
+  - MutationPressureAdaptation
+
+# MendingTouch has no recipe on purpose: the mutation itself is still unimplemented
+# (see the TODO in touch.yml) and `locked` does not stop a recipe from handing it out,
+# so ShockTouch + HypermetabolicBlood would only burn 35 instability for nothing.
+# Re-add this recipe once ActionMutationMendingTouch exists:
+#
+# - type: mutationRecipe
+#   id: MendingTouch
+#   result: MutationMendingTouch
+#   required:
+#   - MutationShockTouch
+#   - MutationHypermetabolicBlood
+- type: mutationRecipe
+  id: Chameleon
+  result: MutationChameleon
+  required:
+  - MutationAntiGlow
+  - MutationColdAdaptation
+
+- type: mutationRecipe
+  id: Insulated
+  result: MutationInsulated
+  required:
+  - MutationShockTouch
+  - MutationThermalAdaptation
+
+- type: mutationRecipe
+  id: VoidMagnet
+  result: MutationVoidMagnet
+  required:
+  - MutationSpatialInstability
+  - MutationAntiGlow
+
+- type: mutationRecipe
+  id: ElasticArms
+  result: MutationElasticArms
+  required:
+  - MutationAutotomy
+  - MutationSpastic
+
+- type: mutationRecipe
+  id: Stimmed
+  result: MutationStimmed
+  required:
+  - MutationAdrenalineRush
+  - MutationHypermetabolicBlood
+
+- type: mutationRecipe
+  id: WebbingProduction
+  result: MutationWebbingProduction
+  required:
+  - MutationAcidicFlesh
+  - MutationAutotomy
+
+- type: mutationRecipe
+  id: ThermalVision
+  result: MutationThermalVision
+  required:
+  - MutationEnhancedPerception
+  - MutationHeatAdaptation
+
+- type: mutationRecipe
+  id: Farsight
+  result: MutationFarsight
+  required:
+  - MutationEnhancedPerception
+  - MutationClever
+
+- type: mutationRecipe
+  id: AntiGlow
+  result: MutationAntiGlow
+  required:
+  - MutationGlowy
+  - MutationSpatialInstability
+
+- type: mutationRecipe
+  id: Monkified
+  result: MutationMonkified
+  required:
+  - MutationClumsiness
+  - MutationDwarfism
+
+- type: mutationRecipe
+  id: Felinized
+  result: MutationFelinized
+  required:
+  - MutationWebbingProduction
+  - MutationDogNose
+
+- type: mutationRecipe
+  id: InternalMartyrdom
+  result: MutationInternalMartyrdom
+  required:
+  - MutationAcidicFlesh
+  - MutationFierySweat
+
+- type: mutationRecipe
+  id: Blindness
+  result: MutationBlindness
+  required:
+  - MutationNearSightedness
+  - MutationWeakPerception
+
+- type: mutationRecipe
+  id: Mute
+  result: MutationMute
+  required:
+  - MutationNervousness
+  - MutationUnintelligible
+
+- type: mutationRecipe
+  id: Acromegaly
+  result: MutationAcromegaly
+  required:
+  - MutationDwarfism
+  - MutationStrength
+
+# ShockTouch used to be produced by Insulated + Glowy, while Insulated itself requires
+# ShockTouch, so the pair (and MendingTouch) could never be obtained. ShockTouch is a base
+# mutation now and Insulated is the upgrade on top of it.

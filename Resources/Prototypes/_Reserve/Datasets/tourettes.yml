@@ -1,0 +1,7 @@
+# based on Trauma-Station: Resources/Prototypes/_Trauma/Datasets/tourettes.yml
+
+- type: localizedDataset
+  id: TourettesSwearing
+  values:
+    prefix: tourettes-swear-
+    count: 8

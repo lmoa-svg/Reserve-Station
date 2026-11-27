@@ -15,7 +15,9 @@ namespace Content.Shared.Mobs.Components
     [RegisterComponent]
     [NetworkedComponent]
     [AutoGenerateComponentState]
-    [Access(typeof(MobStateSystem), typeof(MobThresholdSystem))]
+    // Reserve start: allow MobThresholdMutationSystem to modify allowed states
+    [Access(typeof(MobStateSystem), typeof(MobThresholdSystem), typeof(Content.Shared._Reserve.Genetics.Abilities.MobThresholdMutationSystem))]
+    // Reserve end
     public sealed partial class MobStateComponent : Component
     {
         //default mobstate is always the lowest state level

@@ -115,6 +115,11 @@
   - CloningPodMachineCircuitboardRecipe
   - MedicalScannerMachineCircuitboardRecipe
   - CloningConsoleComputerCircuitboardRecipe
+  # Reserve start: genetics tech unlocks
+  - GeneticsComputerCircuitboardRecipe
+  - HandheldGeneticsScannerRecipe
+  - GeneticsDiskRecipe
+  # Reserve end
   technologyPrerequisites:
   - HighEndSurgery
   position: -4, 9  # Reserve edit: Orchid's Barmania - Service Heaven

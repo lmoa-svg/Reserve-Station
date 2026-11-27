@@ -1,0 +1,37 @@
+﻿
+using Content.Shared.EntityEffects;
+using Content.Shared._Reserve.Genetics.Mutations;
+using System.Numerics;
+using Robust.Shared.GameStates;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
+
+namespace Content.Shared._Reserve.EntityEffects;
+
+/// <summary>
+/// For a mutation target, relays an effect to the target mob.
+/// </summary>
+public sealed partial class RelayMutated : EntityEffectBase<RelayMutated>
+{
+    /// <summary>
+    /// Effect to apply to the implanted entity.
+    /// </summary>
+    [DataField(required: true)]
+    public EntityEffect Effect = default!;
+
+    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+        => Loc.GetString("entity-effect-guidebook-relay-mutated", ("chance", Probability), ("effect", Effect.EntityEffectGuidebookText(prototype, entSys) ?? string.Empty));
+}
+
+public sealed partial class RelayMutatedEffectSystem : EntityEffectSystem<MutationComponent, RelayMutated>
+{
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+
+    protected override void Effect(Entity<MutationComponent> ent, ref EntityEffectEvent<RelayMutated> args)
+    {
+        if (ent.Comp.Target is {} mob)
+            _effects.TryApplyEffect(mob, args.Effect.Effect, args.Scale, args.User);
+    }
+}

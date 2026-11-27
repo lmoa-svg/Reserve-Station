@@ -45,3 +45,6 @@ guide-entry-rules-reserve8 = Валидхант
 guide-entry-rules-reserve9 = ERP
 guide-entry-rules-reserve10 = Нечестная игра
 guide-entry-reverse-engineering = Обратная инженерия
+guide-entry-genetics = Генетика
+guide-entry-mutations = Список мутаций
+

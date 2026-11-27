@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared._Reserve.Genetics.Mutations;
 using Content.Shared.Humanoid;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Audio;
@@ -151,4 +152,12 @@ public sealed partial class TransformData
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadOnly), NonSerialized]
     public HumanoidAppearanceComponent Appearance;
+
+    // Reserve start: genetics changeling integration
+    /// <summary>
+    ///     Mutations to set for the changeling when transforming.
+    /// </summary>
+    [DataField]
+    public MutatableData? Mutations;
+    // Reserve end
 }

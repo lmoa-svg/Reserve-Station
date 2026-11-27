@@ -5,3 +5,9 @@
   name: Urist McHands The Dwarf
   parent: BaseMobDwarf
   id: MobDwarf
+  # Reserve start: dwarf mutations
+  components:
+  - type: Mutatable
+    dormant:
+    - MutationDwarfism # not activated by default it would be too silly
+  # Reserve end

@@ -1,0 +1,12 @@
+# Cargo bounty for xenobiology slime extracts, based on Trauma-Station.
+
+- type: cargoBounty
+  id: BountySlimeExtract
+  reward: 5000
+  description: bounty-description-slime-extract
+  entries:
+  - name: bounty-item-slime-extract
+    amount: 5
+    whitelist:
+      components:
+      - SlimeExtract

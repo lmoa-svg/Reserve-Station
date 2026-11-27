@@ -6,5 +6,12 @@
   suffix: Urisst' Mzhand
   parent: BaseMobReptilian
   id: MobReptilian
+  # Reserve start: reptilian mutations
+  components:
+  - type: Mutatable
+    dormant:
+    - MutationFireBreath
+    - MutationMonkified # return to kobold
+  # Reserve end
 
 #Weh

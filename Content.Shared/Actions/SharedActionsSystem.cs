@@ -564,6 +564,16 @@ public abstract partial class SharedActionsSystem : EntitySystem
         }
     }
 
+    // Reserve start: get target range
+    public float? GetTargetRange(Entity<TargetActionComponent?> action)
+    {
+        if (!Resolve(action, ref action.Comp, false))
+            return null;
+
+        return action.Comp.Range;
+    }
+    // Reserve end
+
     private void OnEntitySetTarget(Entity<EntityTargetActionComponent> ent, ref ActionSetTargetEvent args)
     {
         if (ent.Comp.Event is {} ev)
@@ -618,9 +628,12 @@ public abstract partial class SharedActionsSystem : EntitySystem
         ev.Performer = performer;
         ev.Action = action;
 
-        // TODO: This is where we'd add support for event lists
-        if (!action.Comp.RaiseOnUser && action.Comp.Container is {} container && !_mindQuery.HasComp(container))
+        // Reserve start: raise on action
+        if (action.Comp.RaiseOnAction)
+            target = action.Owner;
+        else if (!action.Comp.RaiseOnUser && action.Comp.Container is {} container && !_mindQuery.HasComp(container))
             target = container;
+        // Reserve end
 
         RaiseLocalEvent(target, (object) ev, broadcast: true);
         handled = ev.Handled;

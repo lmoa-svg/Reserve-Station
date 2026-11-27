@@ -42,3 +42,6 @@ guide-entry-rules-ban-durations-reserve = Ban Durations
 guide-entry-gang-wars = Gang Wars
 guide-entry-reverse-engineering = Reverse Engineering
 guide-entry-pirates = Pirates
+guide-entry-genetics = Genetics
+guide-entry-mutations = Mutations list
+

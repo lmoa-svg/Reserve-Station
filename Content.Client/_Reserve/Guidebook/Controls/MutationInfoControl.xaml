@@ -1,0 +1,20 @@
+<PanelContainer xmlns="https://spacestation14.io"
+        xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+        xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+        HorizontalExpand="True"
+        Margin="5">
+    <PanelContainer.PanelOverride>
+        <gfx:StyleBoxFlat BorderThickness="1" BorderColor="#777777"/>
+    </PanelContainer.PanelOverride>
+    <BoxContainer Orientation="Vertical" Margin="8">
+        <Label Name="MutationName" Align="Center"/>
+        <TextEdit Name="MutationDesc" Editable="False" MinHeight="60"/> <!-- using TextEdit for word wrapping -->
+        <customControls:HSeparator Margin="10" HorizontalExpand="True"/>
+        <BoxContainer Orientation="Horizontal" Margin="4" HorizontalAlignment="Center">
+            <Label Name="MutationInstability" Margin="8"/>
+            <Label Name="MutationDifficulty" Margin="8"/>
+        </BoxContainer>
+        <customControls:HSeparator Margin="10" HorizontalExpand="True"/>
+        <BoxContainer Orientation="Vertical" Name="Obtaining" HorizontalAlignment="Center"/>
+    </BoxContainer>
+</PanelContainer>

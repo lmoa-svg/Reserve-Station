@@ -165,6 +165,14 @@ public sealed partial class ActionComponent : Component
     [DataField, AutoNetworkedField]
     public bool RaiseOnUser;
 
+    // Reserve start: raise on action
+    /// <summary>
+    ///     If true, this will cause the action event to be raised directed at the action entity itself.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool RaiseOnAction;
+    // Reserve end
+
     /// <summary>
     ///     Whether or not to automatically add this action to the action bar when it becomes available.
     /// </summary>

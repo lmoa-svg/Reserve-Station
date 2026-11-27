@@ -17,6 +17,8 @@ using Content.Shared.Climbing.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Server.Containers;
+using Content.Shared._Reserve.Medical;
+using Content.Shared.DeviceLinking;
 using static Content.Shared.MedicalScanner.SharedMedicalScannerComponent; // Hmm...
 
 namespace Content.Server.Medical
@@ -47,6 +49,10 @@ namespace Content.Server.Medical
             SubscribeLocalEvent<MedicalScannerComponent, PortDisconnectedEvent>(OnPortDisconnected);
             SubscribeLocalEvent<MedicalScannerComponent, AnchorStateChangedEvent>(OnAnchorChanged);
             SubscribeLocalEvent<MedicalScannerComponent, CanDropTargetEvent>(OnCanDragDropOn);
+            // Reserve start: medical scanner genetics
+            SubscribeLocalEvent<MedicalScannerComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<MedicalScannerComponent, NewLinkEvent>(OnNewLink);
+            // Reserve end
         }
 
         private void OnCanDragDropOn(EntityUid uid, MedicalScannerComponent component, ref CanDropTargetEvent args)
@@ -135,6 +141,13 @@ namespace Content.Server.Medical
         private void OnDestroyed(EntityUid uid, MedicalScannerComponent scannerComponent, DestructionEventArgs args)
         {
             EjectBody(uid, scannerComponent);
+            // Reserve start: medical scanner genetics
+            var ev = new ScannerDisconnectedEvent(uid);
+            foreach (var console in GetConnectedConsoles(uid, scannerComponent))
+            {
+                RaiseLocalEvent(console, ref ev);
+            }
+            // Reserve end
         }
 
         private void OnDragDropOn(EntityUid uid, MedicalScannerComponent scannerComponent, ref DragDropTargetEvent args)
@@ -144,8 +157,63 @@ namespace Content.Server.Medical
 
         private void OnPortDisconnected(EntityUid uid, MedicalScannerComponent component, PortDisconnectedEvent args)
         {
-            component.ConnectedConsole = null;
+            // Reserve start: medical scanner genetics
+            if (component.ConnectedConsole == args.RemovedPortUid)
+                component.ConnectedConsole = null;
+
+            var ev = new ScannerDisconnectedEvent(uid);
+            RaiseLocalEvent(args.RemovedPortUid, ref ev);
+            // Reserve end
         }
+
+        // Reserve start: medical scanner genetics
+        private void OnMapInit(EntityUid uid, MedicalScannerComponent component, MapInitEvent args)
+        {
+            foreach (var console in GetConnectedConsoles(uid, component))
+            {
+                var ev = new ScannerConnectedEvent(uid);
+                RaiseLocalEvent(console, ref ev);
+
+                if (component.BodyContainer.ContainedEntity is { Valid: true } contained)
+                {
+                    var insertEv = new ScannerInsertedEvent(uid, contained);
+                    RaiseLocalEvent(console, ref insertEv);
+                }
+            }
+        }
+
+        private void OnNewLink(EntityUid uid, MedicalScannerComponent component, NewLinkEvent args)
+        {
+            if (args.SinkPort != MedicalScannerComponent.ScannerPort)
+                return;
+
+            component.ConnectedConsole = args.Source;
+
+            var ev = new ScannerConnectedEvent(uid);
+            RaiseLocalEvent(args.Source, ref ev);
+
+            if (component.BodyContainer.ContainedEntity is { Valid: true } contained)
+            {
+                var insertEv = new ScannerInsertedEvent(uid, contained);
+                RaiseLocalEvent(args.Source, ref insertEv);
+            }
+        }
+
+        private IEnumerable<EntityUid> GetConnectedConsoles(EntityUid uid, MedicalScannerComponent component)
+        {
+            if (component.ConnectedConsole != null)
+                yield return component.ConnectedConsole.Value;
+
+            if (TryComp<DeviceLinkSinkComponent>(uid, out var sink))
+            {
+                foreach (var source in sink.LinkedSources)
+                {
+                    if (source != component.ConnectedConsole)
+                        yield return source;
+                }
+            }
+        }
+        // Reserve end
 
         private void OnAnchorChanged(EntityUid uid, MedicalScannerComponent component, ref AnchorStateChangedEvent args)
         {
@@ -234,6 +302,14 @@ namespace Content.Server.Medical
 
             _containerSystem.Insert(to_insert, scannerComponent.BodyContainer);
             UpdateAppearance(uid, scannerComponent);
+
+            // Reserve start: medical scanner genetics
+            var ev = new ScannerInsertedEvent(uid, to_insert);
+            foreach (var console in GetConnectedConsoles(uid, scannerComponent))
+            {
+                RaiseLocalEvent(console, ref ev);
+            }
+            // Reserve end
         }
 
         public void EjectBody(EntityUid uid, MedicalScannerComponent? scannerComponent)
@@ -247,6 +323,14 @@ namespace Content.Server.Medical
             _containerSystem.Remove(contained, scannerComponent.BodyContainer);
             _climbSystem.ForciblySetClimbing(contained, uid);
             UpdateAppearance(uid, scannerComponent);
+
+            // Reserve start: medical scanner genetics
+            var ev = new ScannerEjectedEvent(uid, contained);
+            foreach (var console in GetConnectedConsoles(uid, scannerComponent))
+            {
+                RaiseLocalEvent(console, ref ev);
+            }
+            // Reserve end
         }
     }
 } 

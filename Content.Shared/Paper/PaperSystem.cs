@@ -301,6 +301,19 @@ public sealed partial class PaperSystem : EntitySystem // Goob
         if (args.Handled)
             return;
 
+        // Reserve start: BlockReading check
+        if (!_uiSystem.IsUiOpen(entity.Owner, PaperUiKey.Key, args.User))
+        {
+            var ev = new PaperReadAttemptEvent();
+            RaiseLocalEvent(args.User, ref ev);
+            if (ev.Cancelled)
+            {
+                args.Handled = true;
+                return;
+            }
+        }
+        // Reserve end
+
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
         _uiSystem.TryToggleUi(entity.Owner, PaperUiKey.Key, args.User);
@@ -427,3 +440,11 @@ public record struct PaperWriteEvent(EntityUid User, EntityUid Paper);
 /// <param name="paper">The paper that the writing will take place on.</param>
 [ByRefEvent]
 public record struct PaperWriteAttemptEvent(EntityUid Paper, string? FailReason = null, bool Cancelled = false);
+
+// Reserve start: BlockReading check
+/// <summary>
+/// Cancellable event for attempting to read a piece of paper in hand.
+/// </summary>
+[ByRefEvent]
+public record struct PaperReadAttemptEvent(bool Cancelled = false);
+// Reserve end

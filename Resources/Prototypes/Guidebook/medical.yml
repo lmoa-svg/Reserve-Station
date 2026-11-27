@@ -14,6 +14,9 @@
   - Surgery # Shitmed Change
   - MedicalPatches # Fix for Medicine Patches
   - Virology # Goobstation
+  # Reserve start: genetics guidebook
+  - Genetics
+  # Reserve end
 
 - type: guideEntry
   id: MedicalDoctor

@@ -1,0 +1,13 @@
+# based on Trauma-Station: Resources/Prototypes/_Trauma/Actions/conjure.yml
+
+- type: entity
+  abstract: true
+  parent: BaseAction
+  id: BaseConjureAction
+  components:
+  - type: ConjureAction
+  - type: Action
+    useDelay: 5
+    raiseOnAction: true
+  - type: InstantAction
+    event: !type:ConjureActionEvent

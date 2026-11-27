@@ -1,0 +1,6 @@
+# based on Trauma-Station: Resources/Prototypes/_Trauma/Entities/categories.yml
+
+- type: entityCategory
+  id: Mutations
+  name: entity-category-name-mutations
+  hideSpawnMenu: true

@@ -51,7 +51,9 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Flash.Components;
+using Content.Shared._Reserve.Genetics.Mutations;
 using Content.Shared.Fluids;
+using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
@@ -88,6 +90,9 @@ namespace Content.Goobstation.Server.Changeling;
 public sealed partial class ChangelingSystem : SharedChangelingSystem
 {
     // this is one hell of a star wars intro text
+    // Reserve start: genetics changeling integration
+    [Dependency] private CommonMutationSystem _mutation = default!;
+    // Reserve end
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private IRobustRandom _rand = default!;
@@ -555,7 +560,10 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         {
             Name = metadata.EntityName,
             DNA = dna.DNA ?? Loc.GetString("forensics-dna-unknown"),
-            Appearance = appearance
+            Appearance = appearance,
+            // Reserve start: genetics changeling integration
+            Mutations = _mutation.GetMutatableData(target),
+            // Reserve end
         };
 
         if (fingerprint.Fingerprint != null)
@@ -625,12 +633,33 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         if (data != null)
         {
-            Comp<FingerprintComponent>(newEnt).Fingerprint = data.Fingerprint;
-            Comp<DnaComponent>(newEnt).DNA = data.DNA;
+            // Reserve start: genetics changeling integration
+            if (TryComp<FingerprintComponent>(newEnt, out var fingerprint))
+            {
+                fingerprint.Fingerprint = data.Fingerprint;
+                Dirty(newEnt, fingerprint);
+            }
+
+            if (TryComp<DnaComponent>(newEnt, out var dna))
+            {
+                dna.DNA = data.DNA;
+                Dirty(newEnt, dna);
+                var dnaEv = new GenerateDnaEvent
+                {
+                    Owner = newEnt,
+                    DNA = data.DNA,
+                };
+                RaiseLocalEvent(newEnt, ref dnaEv);
+            }
+            // Reserve end
             _humanoid.CloneAppearance(data.Appearance.Owner, newEnt);
             _metaData.SetEntityName(newEnt, data.Name);
             var message = Loc.GetString("changeling-transform-finish", ("target", data.Name));
             _popup.PopupEntity(message, newEnt, newEnt);
+            // Reserve start: genetics changeling integration
+            if (data.Mutations is { } mutations)
+                _mutation.LoadMutatableData(newEnt, mutations);
+            // Reserve end
         }
 
         // otherwise we can only transform once

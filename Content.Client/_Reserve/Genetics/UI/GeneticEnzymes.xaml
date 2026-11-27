@@ -1,0 +1,39 @@
+<BoxContainer xmlns="https://spacestation14.io"
+        xmlns:genetics="clr-namespace:Content.Client._Reserve.Genetics.UI"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+        Orientation="Vertical">
+    <controls:NanoHeading Text="{Loc 'genetics-console-scanned-mob'}"/>
+    <BoxContainer Orientation="Horizontal" Align="Center">
+        <Label Name="MobNameLabel" Text="{Loc 'generic-not-available-shorthand'}" Margin="4"/>
+        <Button Name="SaveButton" Text="{Loc 'genetics-console-save-enzymes'}" Margin="4" Disabled="True"/>
+    </BoxContainer>
+
+    <customControls:HSeparator Margin="10" HorizontalExpand="True"/>
+
+    <controls:NanoHeading Text="{Loc 'genetics-console-disk-enzymes'}"/>
+    <BoxContainer Orientation="Horizontal" Align="Center">
+        <BoxContainer Orientation="Vertical" Align="Center">
+            <GridContainer Columns="2">
+                <Label Text="{Loc 'genetics-console-enzymes-current-disk'}" MinWidth="250"/>
+                <Label Name="DiskLabel" Text="{Loc 'genetics-console-no-disk'}"/>
+                <Label Text="{Loc 'genetics-console-enzymes-stored'}"/>
+                <Label Name="DiskNameLabel" Text="{Loc 'generic-not-available-shorthand'}"/>
+                <Label Text="{Loc 'genetics-console-enzymes-sex'}"/>
+                <Label Name="DiskSexLabel" Text="{Loc 'generic-not-available-shorthand'}"/>
+                <Label Text="{Loc 'genetics-console-enzymes-eye-color'}"/>
+                <Label Name="DiskEyeLabel" Text="{Loc 'generic-not-available-shorthand'}"/>
+                <Label Text="{Loc 'genetics-console-enzymes-skin-color'}"/>
+                <Label Name="DiskSkinLabel" Text="{Loc 'generic-not-available-shorthand'}"/>
+            </GridContainer>
+            <controls:StripeBack HorizontalAlignment="Center" MinWidth="250"> <!-- sanabi -->
+                <Button Name="ApplyButton"
+                    Margin="15 4"
+                    Text="{Loc 'genetics-console-apply-enzymes'}"
+                    HorizontalAlignment="Center"
+                    MinWidth="220"
+                    Disabled="True"/>
+            </controls:StripeBack>
+        </BoxContainer>
+    </BoxContainer>
+</BoxContainer>
